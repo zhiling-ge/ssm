@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+	  <meta charset="utf-8">
+	  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <title>Bootstrap 101 Template</title>
+	  <link rel="stylesheet" th:href="@{/bootstrap-3.3.7-dist/css/bootstrap.css}">
+	</head>
+	<body>
+		<script th:src="@{/bootstrap-3.3.7-dist/js/jquery.min.js}" ></script>
+		<script th:src="@{/bootstrap-3.3.7-dist/js/bootstrap.min.js}" ></script>
+		 <h1 style="align-content: center">员工管理信息系统</h1>
+		欢迎您:[[${session.username}]]
+		<table class="table table-bordered table-hover">
+			 <thead>
+				 <tr>
+				 <td>编号</td>
+				 <td>姓名</td>
+				 <td>工作单位</td>
+				 <td>上级领导</td>
+				 <td>日期</td>
+				 <td>工资</td>
+				 <td>资金</td>
+				 <td>部门名称</td>
+					 <td>操作</td>
+				 </tr>
+			 </thead>
+			 
+			 <tbody>
+				 <tr th:each="emp,stat:${empList}">
+				 <td>[[${emp.empno}]]</td>
+				 <td>[[${emp.ename}]]</td>
+				 <td>[[${emp.job}]]</td>
+				 <td>[[${emp.mgr}]]</td>
+				 <td>[[${#dates.format(emp.hiredate,'yyyy-MM-dd')}]]</td>
+				 <td>[[${emp.sal}]]</td>
+				 <td>[[${emp.comm}]]</td>
+				 <td>[[${emp.dept.dname}]]</td>
+					 <td><a th:href="@{'/emp/del?empno='+${emp.empno}}" th:onclick="return confirm('您确定要删除[[${emp.empno}]]吗?')" class="btn btn-danger">删除</a></td>
+				 </tr>
+			 </tbody>
+		</table>
+	</body>
+</html>
